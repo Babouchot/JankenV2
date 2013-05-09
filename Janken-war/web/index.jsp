@@ -42,10 +42,16 @@
                     InitialContext ic = new InitialContext();
                     Object o = ic.lookup("java:global/Janken/Janken-ejb/GamerSession");
                     GamerSessionLocal gamSession = (GamerSessionLocal) o;
-                    
+
                     Gamer gamer = gamSession.searchForGamer(mail, mdp);
-                    
-                    response.sendRedirect("waitingRoom.jsp?id="+gamer.getPseudo());
+
+                    if (gamer != null) {
+                        response.sendRedirect("janken.jsp?id=" + gamer.getPseudo());
+                    }
+                    else {
+                        out.println("Utilisateur inconnu : veuillez vérifier vos identifiants");
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     out.println("Gamer connection failed : " + e.toString());
