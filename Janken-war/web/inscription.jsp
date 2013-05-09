@@ -19,7 +19,7 @@
 <h1>Inscription à Janken :</h1>
 
 
-<form method="post" action="/Janken-war/index.jsp">
+<form method="post" action="/Janken-war/inscription.jsp">
 <table border=10>
   <tr>
     <td>email : </td>
@@ -47,11 +47,12 @@ String mdp = request.getParameter("mdp");
 if (mail != null && !"".equals(mail)) {
     try {
         InitialContext ic = new InitialContext();
-        Object o = ic.lookup("java:comp/env/CustomerSessionLocal");
+        Object o = ic.lookup("java:global/Janken/Janken-ejb/GamerSession");
         GamerSessionLocal gamSession = (GamerSessionLocal) o;
 
         Gamer gamer = new Gamer(mail, pseudo, mdp);
         gamSession.persist(gamer);
+        response.sendRedirect("index.jsp");
 
     } catch(Exception e) {
         e.printStackTrace();

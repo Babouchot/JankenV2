@@ -18,7 +18,7 @@
     <center>
         <h1>Bienvenue sur le jeu Janken !</h1>
         <p><a href="inscription.jsp">Inscris toi</a> ou joue en te connectant !</p>
-        <form method="post" action="/customer-cmp-war/createCustomer.jsp">
+        <form method="post" action="/Janken-war/Customer.jsp">
             <table border=10>
                 <tr>
                     <td>email (id) : </td>
