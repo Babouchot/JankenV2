@@ -56,7 +56,7 @@ if (mail != null && !"".equals(mail)) {
 
     } catch(Exception e) {
         e.printStackTrace();
-        out.println("Create Customer Failed : " + e.toString());
+        out.println("gamer register failed : " + e.toString());
     }
 }
 %>

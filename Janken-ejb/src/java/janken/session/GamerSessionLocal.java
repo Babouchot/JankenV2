@@ -15,7 +15,7 @@ import janken.persistence.Gamer;
  */
 @Local
 public interface GamerSessionLocal {
-    public Gamer searchForGamer(String id);
+    public Gamer searchForGamer(String id, String mdp);
     
     public void persist(Object obj);
     

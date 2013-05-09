@@ -18,7 +18,7 @@
     <center>
         <h1>Bienvenue sur le jeu Janken !</h1>
         <p><a href="inscription.jsp">Inscris toi</a> ou joue en te connectant !</p>
-        <form method="post" action="/Janken-war/Customer.jsp">
+        <form method="post" action="/Janken-war/index.jsp">
             <table border=10>
                 <tr>
                     <td>email (id) : </td>
@@ -40,12 +40,15 @@
             if (mail != null && !"".equals(mail)) {
                 try {
                     InitialContext ic = new InitialContext();
-                    Object o = ic.lookup("java:comp/env/CustomerSessionLocal");
+                    Object o = ic.lookup("java:global/Janken/Janken-ejb/GamerSession");
                     GamerSessionLocal gamSession = (GamerSessionLocal) o;
-
+                    
+                    Gamer gamer = gamSession.searchForGamer(mail, mdp);
+                    
+                    response.sendRedirect("waitingRoom.jsp?id="+gamer.getPseudo());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    out.println("Connect Customer Failed : " + e.toString());
+                    out.println("Gamer connection failed : " + e.toString());
                 }
             }
         %>

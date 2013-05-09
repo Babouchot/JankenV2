@@ -7,11 +7,17 @@ package janken.persistence;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
 *
 * @author maureill
 */
+@NamedQueries(
+        value={@NamedQuery(name="searchForGamer", query="select object (g) from Gamer g"
+        + " WHERE g.mail = :mail AND g.mdp = :mdp")}
+        )
 @Entity
 public class Gamer implements Serializable {
     
