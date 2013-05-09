@@ -46,7 +46,11 @@
                     Gamer gamer = gamSession.searchForGamer(mail, mdp);
 
                     if (gamer != null) {
-                        response.sendRedirect("janken.jsp?id=" + gamer.getPseudo());
+                        HttpSession userSession = request.getSession();
+                        userSession.setAttribute("id", mail);
+                        userSession.setAttribute("mdp", mdp);
+                        String idSession = userSession.getId();
+                        response.sendRedirect("janken.jsp?id=" + idSession);
                     }
                     else {
                         out.println("Utilisateur inconnu : veuillez vérifier vos identifiants");
