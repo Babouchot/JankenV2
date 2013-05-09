@@ -34,7 +34,11 @@ public class GamerSession implements GamerSessionLocal {
         em.remove(mergedObj);
     }
     
-     @Override
+     /**
+     *
+     * @param obj
+     */
+    @Override
     public void persist(Object obj){
         em.persist(obj);
     }

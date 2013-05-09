@@ -36,7 +36,7 @@
 </table>
 <p>
 <input type="submit" name="insc" value="S'inscrire">
-<p>
+</p>
 </form>
 
 <%

@@ -6,8 +6,6 @@ package janken.persistence;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -50,7 +48,7 @@ private Long id;*/
         this.mail = mail;
         this.pseudo = pseudo;
         this.mdp = mdp;
-        this.etat = etat.ABSENT;
+        this.etat = Etat.ABSENT;
         this.victoires = 0;
         this.defaites = 0;
     }

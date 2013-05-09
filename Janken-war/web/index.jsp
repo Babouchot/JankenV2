@@ -4,6 +4,9 @@
     Author : maureill
 --%>
 
+<%@page import="janken.persistence.Gamer"%>
+<%@page import="janken.session.GamerSessionLocal"%>
+<%@page import="javax.naming.InitialContext"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,13 +26,29 @@
                 </tr>
                 <tr>
                     <td>mot de passe : </td>
-                    <td><input type="text" name="mdp" size="25" value=""></td>
+                    <td><input type="password" name="mdp" size="25" value=""></td>
                 </tr>
             </table>
             <p>
                 <input type="submit" name="submit" value="Login">
             </p>
         </form>
+        <%
+            String mail = request.getParameter("id");
+            String mdp = request.getParameter("mdp");
+
+            if (mail != null && !"".equals(mail)) {
+                try {
+                    InitialContext ic = new InitialContext();
+                    Object o = ic.lookup("java:comp/env/CustomerSessionLocal");
+                    GamerSessionLocal gamSession = (GamerSessionLocal) o;
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    out.println("Connect Customer Failed : " + e.toString());
+                }
+            }
+        %>
     </center>
-    </body>
+</body>
 </html>
