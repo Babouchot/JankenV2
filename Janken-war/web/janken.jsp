@@ -67,13 +67,13 @@
                     out.println("<p>Liste des joueurs connectés (Victoires/Défaites) :</p>"
                             + "\n<ul>");
                     for (Gamer gamer : gamers) {
-                        out.println("<li><a href=\"joueur.jsp?id=" + gamer.getPseudo()
-                                + "\">" + gamer.getPseudo() + "</a>(" + gamer.getVictoires()
+                        out.println("<li style=\"color:blue;\">" + gamer.getPseudo() + " (" + gamer.getVictoires()
                                 + "/" + gamer.getDefaites() + ")</li>");
                     }
                     List<Gamer> inGame = gamSession.findAllInGame();
                     for (Gamer gamer : inGame) {
-                        out.println("<li style=\"color:green;\">" + gamer.getPseudo() + "</li>");
+                        out.println("<li style=\"color:green;\">" + gamer.getPseudo() + " (" + gamer.getVictoires()
+                                + "/" + gamer.getDefaites() + ")</li>");
                     }
                     out.println("</ul>");
                 %>

@@ -37,10 +37,14 @@
             }
             
             try {
-                if (instance.playerWin())
+                if (instance.playerWin()) {
                     gamer.addVictoire();
-                else 
+                    out.println("Vous avez gagné !");
+                }
+                else {
                     gamer.addDefaite();
+                    out.println("Vous avez perdu ...");
+                }
                 gamer.setEtat(Gamer.Etat.CONNECTE);
                 gamSession.merge(gamer);
                 session.setAttribute("instance", null);
@@ -64,12 +68,12 @@
         <h2>Jan ... Ken ... Pon !!!</h2>
         <div id="gamer">
             <p style="color: green; font-weight: bold;">
-                <%= gamer.getPseudo()%> : <%= instance.getPlayerScore()%>/10
+                <%= gamer.getPseudo()%> : <%= instance.getPlayerScore()%>/5
             </p>
         </div>
         <div id="cpu">
             <p style="color: red; font-weight: bold;">
-                CPU : <%= instance.getCpuScore()%>/10     
+                CPU : <%= instance.getCpuScore()%>/5     
             </p>
         </div>
         <div>
@@ -97,6 +101,7 @@
             <a href="game.jsp?coup=lizard"><img src="./ressources/lizard.jpg" ></a>
             <a href="game.jsp?coup=spock"><img src="./ressources/spock.jpg" ></a>
         </div>
+            <button id="end" hidden="true">retour au salon</button>
     </center>
 </body>
 </html>
