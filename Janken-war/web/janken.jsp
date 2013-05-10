@@ -4,6 +4,7 @@
     Author     : babouchot
 --%>
 
+<%@ page language="java" %>
 <%@page import="java.util.List"%>
 <%@page import="javax.naming.InitialContext"%>
 <%@page import="janken.session.GamerSessionLocal"%>
@@ -17,10 +18,23 @@
     </head>
     <%! Gamer gamer;%>
     <%! GamerSessionLocal gamSession;%>
+    <%! HttpSession userSession; %>
+    <%! public void disconnect() {
+        gamer.setEtat(Gamer.Etat.ABSENT);
+        gamSession.merge(gamer);
+        userSession.invalidate();
+    }
+    %>
     <%
-        HttpSession userSession = request.getSession();
+        userSession = request.getSession();
         String userMail = (String) userSession.getAttribute("id");
         String userMdp = (String) userSession.getAttribute("mdp");
+        
+        String disconnect = (String) request.getParameter("disconnect");
+        if ("true".equals(disconnect)) {
+            disconnect();
+            response.sendRedirect("index.jsp");
+        }
 
         try {
             InitialContext ic = new InitialContext();
@@ -34,6 +48,7 @@
             out.println("Gamer connection failed : " + e.toString());
         }
     %>
+    <p style="text-align: right;"><a href="janken.jsp?disconnect=true">se déconnecter</a></p>
     <center>
         <body>
             <h2>Bonjour <b><%= gamer.getPseudo()%></b></h2>
@@ -56,11 +71,12 @@
             <div>
                 <%
                     List<Gamer> gamers = gamSession.findAllConnected();
-                    out.println("<p>Liste des joueurs connectés :</p>"
+                    out.println("<p>Liste des joueurs connectés (Victoires/Défaites) :</p>"
                             + "\n<ul>");
                     for (Gamer gamer : gamers) {
                         out.println("<li><a href=\"joueur.jsp?id=" + gamer.getPseudo()
-                                + "\">" + gamer.getPseudo() + "</a></li>");
+                                + "\">" + gamer.getPseudo() + "</a>("+gamer.getVictoires()
+                                + "/" + gamer.getDefaites() + ")</li>");
                     }
                     List<Gamer> inGame = gamSession.findAllInGame();
                     for (Gamer gamer : inGame) {

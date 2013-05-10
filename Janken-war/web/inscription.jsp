@@ -8,7 +8,6 @@
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="janken.persistence.Gamer" %>
 <%@ page import="janken.session.GamerSessionLocal" %>
-<%@ page import="javax.naming.InitialContext" %>
 
 <html>
 
