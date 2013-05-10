@@ -90,9 +90,17 @@ private Long id;*/
     public int getVictoires() {
         return victoires;
     }
+    
+    public void addVictoire() {
+        ++victoires;
+    }
 
     public int getDefaites() {
         return defaites;
+    }
+    
+    public void addDefaite() {
+        ++defaites;
     }
     
     

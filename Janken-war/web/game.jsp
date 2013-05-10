@@ -35,6 +35,20 @@
                 instance = new GameInstance();
                 session.setAttribute("instance", instance);
             }
+            
+            try {
+                if (instance.playerWin())
+                    gamer.addVictoire();
+                else 
+                    gamer.addDefaite();
+                gamer.setEtat(Gamer.Etat.CONNECTE);
+                gamSession.merge(gamer);
+                session.setAttribute("instance", null);
+                response.sendRedirect("janken.jsp?id="+session.getId());
+            }
+            catch (GameInstance.GameInstanceNotFinishedException e) {
+                
+            }
 
             if (played != null) {
                 cpu = instance.play(GameInstance.Janken.valueOf(played.toUpperCase()));

@@ -84,7 +84,7 @@ public class GameInstance {
         return false;
     }
     
-    private class GameInstanceNotFinishedException extends Exception {
+    public class GameInstanceNotFinishedException extends Exception {
         
     }
 }
