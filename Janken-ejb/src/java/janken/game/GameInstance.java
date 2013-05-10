@@ -4,6 +4,7 @@
  */
 package janken.game;
 
+import janken.persistence.Gamer;
 import java.util.Random;
 
 /**
@@ -20,38 +21,59 @@ public class GameInstance {
     private static final int VICTORY = 5;
     private int playerScore;
     private int cpuScore;
+    
+    public int getPlayerScore() {
+        return playerScore;
+    }
+    
+    public int getCpuScore() {
+        return cpuScore;
+    }
 
-    public boolean play(Janken j) {
+    public String play(Janken j) {
         boolean playerWin = false;
+        boolean equality = false;
         Random r = new Random();
         Janken cpu = Janken.values()[r.nextInt(Janken.values().length)];
         switch (j) {
             case ROCK:
-                if (cpu == Janken.LIZARD || cpu == Janken.SCISSORS)
+                if (cpu == Janken.ROCK)
+                    equality = true;
+                else if (cpu == Janken.LIZARD || cpu == Janken.SCISSORS)
                     playerWin = true;
                 break;
             case PAPER:
-                if (cpu == Janken.ROCK || cpu == Janken.SPOCK)
+                if (cpu == Janken.PAPER)
+                    equality = true;
+                else if (cpu == Janken.ROCK || cpu == Janken.SPOCK)
                     playerWin = true;
                 break;
             case SCISSORS:
-                if (cpu == Janken.PAPER || cpu == Janken.LIZARD)
+                if (cpu == Janken.SCISSORS)
+                    equality = true;
+                else if (cpu == Janken.PAPER || cpu == Janken.LIZARD)
                     playerWin = true;
                 break;
             case LIZARD:
-                if (cpu == Janken.SPOCK || cpu == Janken.PAPER)
+                if (cpu == Janken.LIZARD)
+                    equality = true;
+                else if (cpu == Janken.SPOCK || cpu == Janken.PAPER)
                     playerWin = true;
                 break;
             case SPOCK:
-                if (cpu == Janken.ROCK || cpu == Janken.SCISSORS)
+                if (cpu == Janken.SPOCK)
+                    equality = true;
+                else if (cpu == Janken.ROCK || cpu == Janken.SCISSORS)
                     playerWin = true;
                 break;
         }
-        if (playerWin)
+        if (equality)
+            return cpu.toString();
+        else if (playerWin)
             ++playerScore;
         else
             ++cpuScore;
-        return playerWin;
+        return cpu.toString();
     }
     
     public boolean playerWin() throws GameInstanceNotFinishedException {
