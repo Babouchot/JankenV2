@@ -49,9 +49,8 @@
                     if (gamer != null) {
                         gamer.setEtat(Gamer.Etat.CONNECTE);
                         gamSession.merge(gamer);
-                        HttpSession userSession = request.getSession();
-                        userSession.setAttribute("gamer", gamer);
-                        String idSession = userSession.getId();
+                        String idSession = session.getId();
+                        session.setAttribute("gamer", gamer);
                         response.sendRedirect("janken.jsp?id=" + idSession);
                     }
                     else {
