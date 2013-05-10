@@ -16,8 +16,10 @@ import javax.persistence.NamedQuery;
 */
 @NamedQueries(
         value={@NamedQuery(name="searchForGamer", query="select object (g) from Gamer g"
-        + " WHERE g.mail = :mail AND g.mdp = :mdp")}
-        )
+        + " WHERE g.mail = :mail AND g.mdp = :mdp"),
+                @NamedQuery(name="connectedGamers", query="select object (g) from Gamer g"
+        + " WHERE g.etat = :etat")
+        })
 @Entity
 public class Gamer implements Serializable {
     
@@ -78,6 +80,11 @@ private Long id;*/
 
     public Etat getEtat() {
         return etat;
+    }
+    
+    public Etat setEtat(Etat e) {
+        this.etat = e;
+        return e;
     }
 
     public int getVictoires() {

@@ -33,6 +33,7 @@
                 <input type="submit" name="submit" value="Login">
             </p>
         </form>
+        
         <%
             String mail = request.getParameter("id");
             String mdp = request.getParameter("mdp");
@@ -46,14 +47,16 @@
                     Gamer gamer = gamSession.searchForGamer(mail, mdp);
 
                     if (gamer != null) {
+                        gamer.setEtat(Gamer.Etat.CONNECTE);
+                        gamSession.merge(gamer);
                         HttpSession userSession = request.getSession();
-                        userSession.setAttribute("id", mail);
-                        userSession.setAttribute("mdp", mdp);
+                        userSession.setAttribute("gamer", gamer);
                         String idSession = userSession.getId();
                         response.sendRedirect("janken.jsp?id=" + idSession);
                     }
                     else {
-                        out.println("Utilisateur inconnu : veuillez vérifier vos identifiants");
+                        out.println("<p style=\"color:red;\">Utilisateur inconnu : "
+                                + "veuillez vérifier vos identifiants</p>");
                     }
 
                 } catch (Exception e) {

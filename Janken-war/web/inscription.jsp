@@ -56,7 +56,8 @@ if (mail != null && !"".equals(mail)) {
 
     } catch(Exception e) {
         e.printStackTrace();
-        out.println("gamer register failed : " + e.toString());
+        out.println("<p style=\"color:red;\">inscription échouée : "
+                + "un joueur est déja inscrit pour cette adresse mail");
     }
 }
 %>

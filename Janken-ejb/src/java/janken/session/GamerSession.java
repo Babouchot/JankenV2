@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import janken.persistence.Gamer;
+import janken.persistence.Gamer.Etat;
 import java.util.ArrayList;
 import javax.persistence.Query;
 
@@ -41,6 +42,11 @@ public class GamerSession implements GamerSessionLocal {
     public void persist(Object obj) {
         em.persist(obj);
     }
+    
+    @Override
+    public void merge(Object obj) {
+        em.merge(obj);
+    }
 
     @Override
     public Gamer searchForGamer(String id, String mdp) {
@@ -50,8 +56,6 @@ public class GamerSession implements GamerSessionLocal {
             query.setParameter("mail", id);
             query.setParameter("mdp", mdp);
             
-            String test = query.toString();
-
             List<Gamer> gamer = query.getResultList();
 
             if (gamer.size() != 0) {
@@ -64,8 +68,19 @@ public class GamerSession implements GamerSessionLocal {
     }
 
     @Override
-    public List findAllConnected() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Gamer> findAllConnected() {
+        Query query = em.createNamedQuery("connectedGamers");
+        query.setParameter("etat", Etat.CONNECTE);
+        List<Gamer> gamers = query.getResultList();
+        return gamers;
+    }
+    
+    @Override
+    public List<Gamer> findAllInGame() {
+        Query query = em.createNamedQuery("connectedGamers");
+        query.setParameter("etat", Etat.INGAME);
+        List<Gamer> gamers = query.getResultList();
+        return gamers;
     }
 
     @Override

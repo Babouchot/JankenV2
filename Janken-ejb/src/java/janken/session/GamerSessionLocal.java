@@ -19,7 +19,11 @@ public interface GamerSessionLocal {
     
     public void persist(Object obj);
     
+    public void merge(Object obj);
+    
     public List findAllConnected();
+    
+    public List findAllInGame();
     
     public List findGamerByFirstName(String firstName);
     
