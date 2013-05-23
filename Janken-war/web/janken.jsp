@@ -20,6 +20,9 @@
     <%! GamerSessionLocal gamSession;%>
 
     <%
+        // Set refresh, autoload time as 5 seconds
+        response.setIntHeader("Refresh", 5);
+        
         String idSession = (String) request.getParameter("id");
         String disconnect = (String) request.getParameter("disconnect");
 
