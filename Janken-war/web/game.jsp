@@ -15,6 +15,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Janken</title>
     </head>
+    
+    
+    
     <%! Gamer gamer;%>
     <%! GameInstance instance;%>
     <%! String played;%>
@@ -68,14 +71,27 @@
         <h2>Jan ... Ken ... Pon !!!</h2>
         <div id="gamer">
             <p style="color: green; font-weight: bold;">
-                <%= gamer.getPseudo()%> : <%= instance.getPlayerScore()%>/5
+                <%= gamer.getPseudo()%> : <span id="pscore"><%= instance.getPlayerScore()%></span>/5
             </p>
         </div>
         <div id="cpu">
             <p style="color: red; font-weight: bold;">
-                CPU : <%= instance.getCpuScore()%>/5     
+                CPU : <span id="cpuscore"><%= instance.getCpuScore()%></span>/5     
             </p>
         </div>
+            <script type="text/javascript">
+        var pscore = document.getElementById('pscore');
+        var cpuscore = document.getElementById('cpuscore');
+        if (pscore.innerHTML >= 5) {
+            alert("Bravo ! Vous avez gagné !");
+            document.location.replace("./game.jsp");
+        }
+        else if (cpuscore.innerHTML >= 5) {
+            alert("Dommage, vous avez perdu !");
+            document.location.replace("./game.jsp");
+        }
+        
+    </script>
         <div>
             <p style="float: left;">
                 <%
